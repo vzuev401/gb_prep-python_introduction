@@ -69,3 +69,4 @@ while is_ready:
     print()
 
 print('Пока-пока!')
+
