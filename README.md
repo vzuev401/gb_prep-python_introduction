@@ -1,0 +1,1 @@
+I omitted tasks whose solution was simple and not fun.
