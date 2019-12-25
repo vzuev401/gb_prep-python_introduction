@@ -6,14 +6,17 @@ ATTR_POINTS_COUNT = 5
 ATTR_POINTS_COSTS = {
     'damage': 0.5,
     'health': 10,
+    'armor': 0.11,
 }
 ATTR_POINTS_KEYS = {
     'damage': '1',
     'health': '2',
+    'armor': '3',
 }
 ATTR_INIT_STATE = {
     'damage': 5,
     'health': 100,
+    'armor': 1,
 }
 
 
@@ -23,6 +26,7 @@ def print_attr_points_costs():
         f'Распределение очков. Доступно: {ATTR_POINTS_COUNT}\n'
         f'1. +{ATTR_POINTS_COSTS["damage"]} к урону\n'
         f'2. +{ATTR_POINTS_COSTS["health"]} к здоровью\n'
+        f'3. +{ATTR_POINTS_COSTS["armor"]} к броне\n'
     )
 
 
@@ -30,6 +34,7 @@ def print_enemies(_player, _enemy):
     print(f'{_player["name"]:>7}  против    {_enemy["name"]:<7}')
     print(f'{_player["damage"]:>7.2f}  урон      {_enemy["damage"]:<7.2f}')
     print(f'{_player["health"]:>7.2f}  здоровье  {_enemy["health"]:<7.2f}')
+    print(f'{_player["armor"]:>7.2f}  броня     {_enemy["armor"]:<7.2f}')
     print()
 
 
@@ -69,8 +74,13 @@ def apply_choice(unit, choice_string):
 
 
 # Calculations
+def calculate_damage(initiator, aim):
+    bonus = random.randint(0, 1) * (initiator['damage'] / 20)
+    return (initiator['damage'] / aim['armor']) + bonus
+
+
 def attack(initiator, aim):
-    aim['health'] -= initiator['damage']
+    aim['health'] -= calculate_damage(initiator, aim)
 # END Calculations
 
 
