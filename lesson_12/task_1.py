@@ -9,7 +9,7 @@ def serialize_and_write_to_file(_path, _package, _content):
     elif type(dump) == str:
         _path.write_text(dump)
     else:
-        print('_content must be str or bytes')
+        print('Something went wrong... Rebuke the developer')
         return False
 
     print(
